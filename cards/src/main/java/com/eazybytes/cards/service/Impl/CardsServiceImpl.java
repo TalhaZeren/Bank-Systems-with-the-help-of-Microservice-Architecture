@@ -1,6 +1,6 @@
 package com.eazybytes.cards.service.Impl;
 
-import com.eazybytes.cards.constants.CardsConstant;
+import com.eazybytes.cards.constants.CardsConstants;
 import com.eazybytes.cards.dto.CardsDto;
 import com.eazybytes.cards.entity.Cards;
 import com.eazybytes.cards.exception.CardAlreadyExistException;
@@ -10,8 +10,6 @@ import com.eazybytes.cards.repository.CardsRepository;
 import com.eazybytes.cards.service.ICardsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 import java.util.Random;
@@ -23,13 +21,14 @@ public class CardsServiceImpl implements ICardsService {
 
     private CardsRepository cardsRepository;
 
+
     @Override
     public void createCard(String mobileNumber) {
         Optional<Cards> optionalCards = cardsRepository.findByMobileNumber(mobileNumber);
         if (optionalCards.isPresent()) {
         throw new CardAlreadyExistException("The card already registered with given number"+mobileNumber);
         }
-
+        cardsRepository.save(createNewCard(mobileNumber));
     }
 
     private Cards createNewCard(String mobileNumber) {
@@ -37,10 +36,10 @@ public class CardsServiceImpl implements ICardsService {
         long randomCardNumber = 100000000000L + new Random().nextInt(900000000);
         newCard.setMobileNumber(mobileNumber);
         newCard.setCardNumber(Long.toString(randomCardNumber));
-        newCard.setCardType(CardsConstant.CREDIT_CARD);
-        newCard.setTotalLimit(CardsConstant.NEW_CARD_LIMIT);
+        newCard.setCardType(CardsConstants.CREDIT_CARD);
+        newCard.setTotalLimit(CardsConstants.NEW_CARD_LIMIT);
         newCard.setAmountUsed(0);
-        newCard.setAvailableAmount(CardsConstant.NEW_CARD_LIMIT);
+        newCard.setAvailableAmount(CardsConstants.NEW_CARD_LIMIT);
         return newCard;
     }
 

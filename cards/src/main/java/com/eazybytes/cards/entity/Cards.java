@@ -1,19 +1,16 @@
 package com.eazybytes.cards.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 @Entity
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cards {
+public class Cards extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cardId;
@@ -29,6 +26,5 @@ public class Cards {
     private int amountUsed;
 
     private int availableAmount;
-
 
 }

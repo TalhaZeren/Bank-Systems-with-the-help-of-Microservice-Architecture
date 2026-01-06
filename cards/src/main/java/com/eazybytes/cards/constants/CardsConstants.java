@@ -1,8 +1,8 @@
 package com.eazybytes.cards.constants;
 
-public final class CardsConstant {
+public final class CardsConstants {
 
-    private CardsConstant() {
+    private CardsConstants() {
     }
     public static final String  CREDIT_CARD = "Credit Card";
     public static final int  NEW_CARD_LIMIT = 1_00_000;

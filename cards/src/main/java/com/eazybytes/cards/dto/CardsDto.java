@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.Data;
-import org.springframework.scheduling.annotation.Scheduled;
+import lombok.*;
 
+@Schema(name = "Cards",
+        description = "Schema to hold Card information"
+)
 @Data
 public class CardsDto {
 
@@ -29,7 +31,6 @@ public class CardsDto {
     @Schema(
             description = "Type of the card", example = "Credit Card"
     )
-
     private String cardType;
 
     @Positive(message = "Total card limit should be greater than zero")
